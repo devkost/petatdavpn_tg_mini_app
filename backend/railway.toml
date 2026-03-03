@@ -1,12 +1,9 @@
 [build]
-builder = "dockerfile"         # Используем наш Dockerfile
-dockerfilePath = "Dockerfile"  # Путь относительно папки backend/
+builder = "dockerfile"
+dockerfilePath = "Dockerfile"
 
 [deploy]
-startCommand = "uvicorn main:app --host 0.0.0.0 --port $PORT"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 3
-
-# Healthcheck — Railway будет проверять что сервис живой
 healthcheckPath = "/health"
 healthcheckTimeout = 30
