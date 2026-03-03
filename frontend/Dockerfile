@@ -14,4 +14,4 @@ RUN npm install -g serve
 COPY --from=builder /app/dist ./dist
 
 EXPOSE $PORT
-CMD serve -s dist -l $PORT
+CMD serve -s dist --listen tcp://0.0.0.0:$PORT
