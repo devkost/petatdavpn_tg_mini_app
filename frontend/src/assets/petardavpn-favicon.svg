@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a0a2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d0520;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff4d00;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c0003a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="petardaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff9500" />
+      <stop offset="40%" style="stop-color:#ff4d00" />
+      <stop offset="100%" style="stop-color:#cc1a00" />
+    </linearGradient>
+    <linearGradient id="fuseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffe066" />
+      <stop offset="100%" style="stop-color:#ff9500" />
+    </linearGradient>
+    <radialGradient id="glowGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#ff6a00;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#ff6a00;stop-opacity:0" />
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="256" fill="url(#bgGrad)"/>
+
+  <!-- Glow behind shield -->
+  <ellipse cx="256" cy="280" rx="150" ry="130" fill="url(#glowGrad)" opacity="0.7"/>
+
+  <!-- Shield body -->
+  <path d="M256 110 L370 155 L370 270 Q370 350 256 400 Q142 350 142 270 L142 155 Z"
+        fill="url(#shieldGrad)" filter="url(#glow)"/>
+
+  <!-- Shield inner highlight -->
+  <path d="M256 130 L354 170 L354 268 Q354 336 256 380 Q158 336 158 268 L158 170 Z"
+        fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+
+  <!-- Shield inner dark overlay for depth -->
+  <path d="M256 145 L345 182 L345 267 Q345 326 256 368 Q167 326 167 267 L167 182 Z"
+        fill="rgba(0,0,0,0.25)"/>
+
+  <!-- Petarda (firecracker) body - centered on shield -->
+  <rect x="223" y="185" width="66" height="110" rx="14" ry="14"
+        fill="url(#petardaGrad)" filter="url(#softGlow)"/>
+
+  <!-- Petarda stripes -->
+  <rect x="223" y="215" width="66" height="10" fill="rgba(255,255,255,0.15)"/>
+  <rect x="223" y="240" width="66" height="10" fill="rgba(255,255,255,0.15)"/>
+  <rect x="223" y="265" width="66" height="10" fill="rgba(255,255,255,0.15)"/>
+
+  <!-- Petarda top cap -->
+  <rect x="228" y="180" width="56" height="18" rx="6" fill="#ffcc00" filter="url(#softGlow)"/>
+
+  <!-- Fuse -->
+  <path d="M256 175 Q270 155 285 140 Q295 130 305 118"
+        fill="none" stroke="url(#fuseGrad)" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- Spark at fuse tip -->
+  <circle cx="305" cy="118" r="10" fill="#ffe066" filter="url(#glow)" opacity="0.9"/>
+  <!-- Spark rays -->
+  <g filter="url(#glow)" opacity="0.85" stroke="#ffee88" stroke-width="3" stroke-linecap="round">
+    <line x1="305" y1="104" x2="305" y2="96"/>
+    <line x1="317" y1="108" x2="323" y2="102"/>
+    <line x1="319" y1="118" x2="328" y2="118"/>
+    <line x1="293" y1="108" x2="287" y2="102"/>
+    <line x1="316" y1="128" x2="322" y2="134"/>
+    <line x1="294" y1="128" x2="288" y2="134"/>
+  </g>
+
+  <!-- VPN lock icon on petarda -->
+  <rect x="240" y="222" width="32" height="24" rx="4" fill="rgba(255,255,255,0.92)"/>
+  <path d="M248 222 L248 216 Q248 208 256 208 Q264 208 264 216 L264 222"
+        fill="none" stroke="rgba(255,255,255,0.92)" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="256" cy="234" r="5" fill="#ff4d00"/>
+  <rect x="254" y="234" width="4" height="7" rx="2" fill="#ff4d00"/>
+
+  <!-- Sparkles around shield -->
+  <g filter="url(#softGlow)" opacity="0.7">
+    <path d="M150 200 L153 190 L156 200 L166 203 L156 206 L153 216 L150 206 L140 203 Z" fill="#ffcc00"/>
+    <path d="M362 230 L364 223 L366 230 L373 232 L366 234 L364 241 L362 234 L355 232 Z" fill="#ff9500"/>
+    <path d="M170 330 L172 323 L174 330 L181 332 L174 334 L172 341 L170 334 L163 332 Z" fill="#ff6a00"/>
+  </g>
+
+  <!-- Bottom subtle text "VPN" -->
+  <text x="256" y="388" text-anchor="middle" font-family="'Arial Black', Arial" font-weight="900"
+        font-size="34" fill="rgba(255,255,255,0.9)" letter-spacing="6" filter="url(#softGlow)">VPN</text>
+
+  <!-- Outer ring accent -->
+  <circle cx="256" cy="256" r="248" fill="none" stroke="rgba(255,100,0,0.2)" stroke-width="4"/>
+</svg>

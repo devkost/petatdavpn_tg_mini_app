@@ -1,0 +1,184 @@
+/* ─── Контейнер ──────────────────────────────────────────────── */
+.container {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 40px 48px;
+    min-width: 0;
+}
+
+/* ─── Header ─────────────────────────────────────────────────── */
+.header {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    max-width: 376px;
+    padding: 13px;
+
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 15px;
+}
+
+.headerTitle {
+    font-size: 20px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #FFFFFF, #747474);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+    flex: 1;
+}
+
+.backBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+.backBtn:hover  { background: rgba(255, 255, 255, 0.08); color: #fff; }
+.backBtn:active { background: rgba(255, 255, 255, 0.12); }
+
+.headerSpacer { width: 36px; flex-shrink: 0; }
+
+/* ─── Инфо карточка — растягивается ─────────────────────────── */
+.infoCard {
+    flex: 1 1 0;
+    min-height: 100px;
+
+    width: 100%;
+    max-width: 376px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 18px;
+    padding: 24px;
+    text-align: center;
+}
+
+.infoTitle {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.infoDesc {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--def-text);
+    line-height: 1.7;
+    white-space: pre-line;
+}
+
+/* ─── Синяя кнопка ───────────────────────────────────────────── */
+.btnBlue {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 376px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 17px 0;
+    border-radius: 15px;
+    border: none;
+    background: var(--btn-color);
+    font-size: 15px;
+    font-weight: 600;
+    color: #ffffff;
+    cursor: pointer;
+    transition: opacity 0.15s ease, transform 0.1s ease;
+}
+.btnBlue:hover  { opacity: 0.88; }
+.btnBlue:active { transform: scale(0.98); opacity: 0.75; }
+
+/* ─── Строка со ссылкой ──────────────────────────────────────── */
+.linkRow {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 376px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.linkBox {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 18px;
+
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 15px;
+    color: #ffffff;
+    min-width: 0;
+}
+
+.linkText {
+    font-size: 14px;
+    font-weight: 500;
+    color: #FFFFFF;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.copyBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 15px;
+    border: none;
+    background: var(--btn-color);
+    color: #ffffff;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: opacity 0.15s ease, transform 0.1s ease;
+}
+.copyBtn:hover  { opacity: 0.88; }
+.copyBtn:active { transform: scale(0.96); }
+
+/* ═══════════════════════════════════════════════════════════════
+   МОБИЛЬНЫЕ / TG MINI APP (≤ 520px)
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 520px) {
+    .container { padding: 16px; gap: 12px; }
+    .header    { max-width: 100%; }
+    .infoCard  { max-width: 100%; }
+    .btnBlue   { max-width: 100%; }
+    .linkRow   { max-width: 100%; }
+
+    .headerTitle { font-size: 16px; }
+    .infoTitle   { font-size: 16px; }
+    .infoDesc    { font-size: 12px; }
+    .btnBlue     { font-size: 14px; padding: 15px 0; border-radius: 14px; }
+}
+
+:global(body.tg-app) .container {
+    padding-top: calc(var(--tg-header-height, 0px));
+    padding-bottom: 32px;
+}

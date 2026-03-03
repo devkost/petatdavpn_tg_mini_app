@@ -1,0 +1,218 @@
+/* ─── Info-блок ──────────────────────────────────────────────── */
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 40px 48px;
+
+    /* Растягивается на свободное место (при отдалении) */
+    flex: 1;
+    /* Порог: ниже этого — контейнер скроллит, stats не сжимается */
+    min-height: 380px;
+}
+
+/* ─── Верхняя группа: бейдж + бренд + слоган ─────────────────── */
+.infoTop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* ─── Бейдж ──────────────────────────────────────────────────── */
+.badge {
+    background: rgba(34, 211, 165, 0.1);
+    border: 1px solid rgba(34, 211, 165, 0.2);
+    border-radius: 100px;
+    padding: 6px 20px;
+    color: #22D3A5;
+    white-space: nowrap;
+}
+
+/* ─── Бренд ──────────────────────────────────────────────────── */
+.brand {
+    font-size: 50px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #FFFFFF, #747474);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+}
+
+/* ─── Слоган ─────────────────────────────────────────────────── */
+.tagline {
+    text-align: center;
+    color: var(--def-text);
+    line-height: 1.6;
+}
+
+/* ─── Статистика — растягивается в свободное место внутри info ── */
+.stats {
+    flex: 1 1 0;
+    width: 100%;
+    max-width: 376px;
+
+    display: flex;
+    align-items: stretch;
+
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.statItem {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    gap: 4px;
+}
+
+.statValue {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.statLabel {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--def-text);
+}
+
+.divider {
+    width: 1px;
+    flex-shrink: 0;
+    background: var(--border);
+}
+
+/* ─── Разделитель ────────────────────────────────────────────── */
+.separator {
+    height: 1px;
+    flex-shrink: 0;
+    background: var(--border);
+}
+
+/* ─── Блок с кнопками ────────────────────────────────────────── */
+.actions {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 40px 48px;
+}
+
+/* ─── Кнопки ─────────────────────────────────────────────────── */
+.btn_email,
+.btn_createacc,
+.btn_telegramacc {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 0;
+    border-radius: 15px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #FFFFFF;
+    cursor: pointer;
+    gap: 8px;
+    transition: opacity 0.15s ease, transform 0.1s ease;
+    flex-shrink: 0;
+}
+
+.btn_email:hover,
+.btn_createacc:hover,
+.btn_telegramacc:hover { opacity: 0.88; }
+
+.btn_email:active,
+.btn_createacc:active,
+.btn_telegramacc:active { transform: scale(0.98); opacity: 0.75; }
+
+.btn_email       { background: var(--btn-color); border: none; }
+.btn_createacc   { background: #151929; border: 1px solid var(--border); }
+.btn_telegramacc { background: #2CA5E0; border: none; }
+
+.or {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--def-text);
+}
+
+.legal {
+    font-size: 11px;
+    color: var(--def-text);
+    text-align: center;
+    line-height: 1.7;
+    margin-top: 4px;
+}
+.legal a { color: #60A5FA; text-decoration: none; }
+.legal a:hover { text-decoration: underline; }
+
+/* ═══════════════════════════════════════════════════════════════
+   МОБИЛЬНЫЕ / TG MINI APP  (≤ 520px)
+   — здесь оставляем растягивание, т.к. скролл нежелателен
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 520px) {
+    .info {
+        flex: 1 1 0;
+        min-height: 0;
+        padding: 32px 20px 20px;
+        gap: 14px;
+        justify-content: space-between;
+    }
+
+    .infoTop { gap: 12px; }
+
+    .brand   { font-size: 38px; }
+    .tagline { font-size: 11px; }
+
+    /* На мобиле stats снова растягивается */
+    .stats {
+        flex: 1 1 0;
+        height: auto;
+        min-height: 72px;
+        max-width: 100%;
+    }
+
+    .statValue { font-size: 16px; }
+    .statLabel { font-size: 13px; }
+
+    .separator { display: none; }
+
+    .actions {
+        flex: 0 0 auto;
+        padding: 20px 20px 32px;
+        gap: 12px;
+    }
+
+    .btn_email,
+    .btn_createacc,
+    .btn_telegramacc {
+        font-size: 14px;
+        padding: 14px 0;
+        border-radius: 14px;
+    }
+
+    .legal { font-size: 10px; }
+}
+
+@media (max-width: 374px) {
+    .info    { padding: 32px 16px 16px; gap: 10px; }
+    .brand   { font-size: 32px; }
+    .actions { padding: 16px 16px 24px; gap: 10px; }
+    .btn_email,
+    .btn_createacc,
+    .btn_telegramacc { padding: 12px 0; font-size: 13px; }
+}
+
+:global(body.tg-app) .info {
+    /* Базовый паддинг + точная высота плашки TG */
+    padding-top: calc(var(--tg-header-height, 0px));
+    padding-bottom: 32px;
+}

@@ -1,0 +1,205 @@
+/* ─── Контейнер — занимает весь .container из App ───────────── */
+.container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 40px 48px;
+    min-width: 0;
+}
+
+/* ─── Header ─────────────────────────────────────────────────── */
+.header {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    max-width: 376px;
+    padding: 13px;
+
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 15px;
+}
+
+.headerTitle {
+    font-size: 20px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #FFFFFF, #747474);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+}
+
+.headerBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+.headerBtn:hover  { background: rgba(255, 255, 255, 0.08); color: #fff; }
+.headerBtn:active { background: rgba(255, 255, 255, 0.12); }
+
+/* ─── Cards — свободный блок, растягивается ─────────────────── */
+.cards {
+    flex: 1 1 0;
+    min-height: 220px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 376px;
+}
+
+/* Верхний ряд — 2 карточки поровну */
+.cardsRow {
+    /* flex: 1 — занимает половину свободного места */
+    flex: 1 1 0;
+    min-height: 0;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Нижний ряд — 1 карточка по центру */
+.cardsRowCenter {
+    flex: 1 1 0;
+    min-height: 0;
+
+    display: flex;
+    justify-content: center;
+}
+.cardsRowCenter .card {
+    width: calc(50% - 5px);
+}
+
+/* ─── Card — заполняет ряд по высоте ────────────────────────── */
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 90px;
+
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 18px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.card svg { color: #FFFFFF; }
+
+.cardLabel {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--def-text);
+    text-align: center;
+}
+
+.cardValue {
+    font-size: 17px;
+    font-weight: 500;
+    color: #ffffff;
+    text-align: center;
+}
+
+.cardValueGreen  { color: #22C55E; }
+.cardValueOrange { color: #FC920E; }
+.cardValueRed    { color: #EF4444; }
+
+/* ─── Actions — фиксированный нижний блок ───────────────────── */
+.actions {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 376px;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 16px 18px;
+    border-radius: 15px;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    gap: 8px;
+    transition: opacity 0.15s ease, transform 0.1s ease;
+}
+.btn:active { transform: scale(0.98); opacity: 0.8; }
+
+.btnLeft {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #ffffff;
+}
+
+.btnRight {
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0.75;
+    color: #ffffff;
+    flex-shrink: 0;
+}
+
+.btnBlue { background: var(--btn-color); }
+.btnBlue:hover { background: #1d55d4; }
+
+.btnDark {
+    background: #151929;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    justify-content: center;
+}
+.btnDark .btnLeft { color: rgba(255, 255, 255, 0.85); }
+.btnDark:hover { background: rgba(255, 255, 255, 0.08); }
+
+/* ═══════════════════════════════════════════════════════════════
+   МОБИЛЬНЫЕ / TG MINI APP (≤ 520px)
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 520px) {
+    .container   { padding: 16px; gap: 12px; }
+
+    .header    { max-width: 100%; }
+    .cards     { max-width: 100%; }
+    .actions   { max-width: 100%; gap: 8px; }
+
+    .cardsRow  { gap: 8px; }
+    .cards     { gap: 8px; }
+
+    .card { min-height: 80px; border-radius: 14px; }
+
+    .cardLabel { font-size: 10px; }
+    .cardValue { font-size: 15px; }
+
+    .btn {
+        padding: 14px 16px;
+        font-size: 14px;
+        border-radius: 14px;
+    }
+}
+
+/* ─── TG Mini App — отступ под шапку ────────────────────────── */
+:global(body.tg-app) .container {
+    padding-top: calc(var(--tg-header-height, 0px));
+    padding-bottom: 32px;
+}
