@@ -1,7 +1,3 @@
 [build]
-builder = "nixpacks"           # Railway сам определит Node.js
-buildCommand = "npm run build"
-
-[deploy]
-startCommand = "npx serve -s dist -p $PORT"  # Serve собранный React
-restartPolicyType = "on_failure"
+builder = "dockerfile"
+dockerfilePath = "Dockerfile"
