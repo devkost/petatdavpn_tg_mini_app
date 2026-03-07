@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import styles from './Referral.module.css'
+import Header from '../../ui/Header/Header'
 
 const perks = [
     '+3 дня подписки',
@@ -19,15 +20,7 @@ const Referral = () => {
     return (
         <>
             <div className={styles.container}>
-                <div className={styles.header}>
-                    <button className={styles.backBtn} onClick={() => navigate(-1)}>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/>
-                        </svg>
-                    </button>
-                    <span className={styles.headerTitle}>Пригласить друга</span>
-                    <div className={styles.headerSpacer} />
-                </div>
+                <Header title="Пригласить друга" />
 
                 {/* Счётчик — свободный блок */}
                 <div className={styles.counterCard}>

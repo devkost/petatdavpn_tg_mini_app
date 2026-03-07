@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import styles from './Home.module.css'
+import Header from '../../ui/Header/Header'
+import '../../styles/global.css'
 import { api } from '../../api'
 
 const getOS = () => {
@@ -13,56 +15,39 @@ const getOS = () => {
     return 'Устройство'
 }
 
-const Home = () => {
+const Home = ({tgId}) => {
     const navigate = useNavigate()
     const os = getOS()
 
-    const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
+    const [user, setUser] = useState(null)
 
     useEffect(() => {
+        if (!tgId) {
+            console.error("Не удалось получить tg_id из Telegram WebApp")
+            setLoading(false)
+            return
+        }
+
         const fetchUser = async () => {
-            const tgUser = window.Telegram?.WebApp?.initDataUnsafe?.user
-            const tgId = tgUser?.id
-
-            if (!tgId) {
-                setLoading(false)
-                return
-            }
-
             try {
                 const data = await api.get(`/user/${tgId}`)
                 setUser(data)
-            } catch (err) {
-                console.error('Ошибка загрузки пользователя:', err)
-            } finally {
                 setLoading(false)
+                console.log(data)
+            } catch (error) {
+                console.error("Ошибка загрузки", error)
             }
         }
-
         fetchUser()
     }, [])
 
-    if (loading) return <div className={styles.loading}>Загрузка...</div>
+    if (loading) return <div className="errorLoad">Загрузка...</div>
 
     return (
         <>
             <div className={styles.container}>
-                <div className={styles.header}>
-                    <button className={styles.headerBtn}>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
-                        </svg>
-                    </button>
-
-                    <span className={styles.headerTitle}>PetardaVPN</span>
-
-                    <button className={styles.headerBtn}>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/>
-                        </svg>
-                    </button>
-                </div>
+                <Header title="PetardaVPN" tgBtn/>
 
                 <div className={styles.cards}>
                     {/* Верхний ряд: 2 карточки */}
@@ -72,7 +57,7 @@ const Home = () => {
                                 <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
                             </svg>
                             <span className={styles.cardLabel}>Статус</span>
-                            <span className={`${styles.cardValue} ${styles.cardValueGreen}`}>Активна</span>
+                            <span className={`${styles.cardValue} ${user.is_active ? styles.cardValueGreen : styles.cardValueRed}`}>{user.is_active ? "Активна" : "Не активна"}</span>
                         </div>
 
                         <div className={styles.card}>
@@ -88,7 +73,7 @@ const Home = () => {
                     <div className={styles.cardsRowCenter}>
                         <div className={styles.card}>
                             <span className={styles.cardLabel}>Баланс</span>
-                            <span className={styles.cardValue}>{user?.balance?.toLocaleString('en-US').replace(/,/g, '.') ?? "-"}</span>
+                            <span className={styles.cardValue}>{user.balance.toLocaleString('de-DE')} ₽</span>
                         </div>
                     </div>
                 </div>
@@ -111,7 +96,7 @@ const Home = () => {
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/>
                             </svg>
-                            Продлить подписку
+                            Пополнить баланс
                         </span>
                         <span className={styles.btnRight}>от 299 ₽</span>
                     </button>

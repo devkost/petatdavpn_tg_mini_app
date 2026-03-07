@@ -1,0 +1,66 @@
+/* ─── Header ─────────────────────────────────────────────────── */
+.header {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    max-width: 376px;
+    padding: 13px;
+
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 15px;
+}
+
+.headerTitle {
+    font-size: 20px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #FFFFFF, #747474);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+}
+
+.headerBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+.headerBtn:hover  { background: rgba(255, 255, 255, 0.08); color: #fff; }
+.headerBtn:active { background: rgba(255, 255, 255, 0.12); }
+
+.backBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+.backBtn:hover  { background: rgba(255, 255, 255, 0.08); color: #fff; }
+.backBtn:active { background: rgba(255, 255, 255, 0.12); }
+
+.headerSpacer { width: 36px; flex-shrink: 0; }
+
+/* ═══════════════════════════════════════════════════════════════
+   МОБИЛЬНЫЕ / TG MINI APP (≤ 520px)
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 520px) {
+    .header    { max-width: 100%; }
+}

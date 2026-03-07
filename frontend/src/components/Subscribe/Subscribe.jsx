@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import styles from './Subscribe.module.css'
+import Header from '../../ui/Header/Header'
 
 const benefits = [
     'Обход ограничений и глушилок',
@@ -19,15 +20,7 @@ const Subscribe = () => {
         <div className={styles.container}>
 
             {/* Header */}
-            <div className={styles.header}>
-                <button className={styles.backBtn} onClick={() => navigate(-1)}>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/>
-                    </svg>
-                </button>
-                <span className={styles.headerTitle}>Подписка</span>
-                <div className={styles.headerSpacer} />
-            </div>
+            <Header title="Подписка" />
 
             {/* Benefits — фиксированная высота */}
             <div className={styles.card}>
@@ -73,11 +66,11 @@ const Subscribe = () => {
             </div>
 
             {/* Кнопка */}
-            <button className={styles.btnChoose} onClick={() => navigate('/tariff')}>
+            <button className={styles.btnChoose} onClick={() => navigate('/payment')}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M5 12h14"/><path d="M12 5l7 7-7 7"/>
                 </svg>
-                Выбрать тариф
+                Перейти к пополнению
             </button>
         </div>
     )

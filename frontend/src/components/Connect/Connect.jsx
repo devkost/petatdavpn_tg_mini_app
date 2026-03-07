@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import styles from './Connect.module.css'
+import Header from '../../ui/Header/Header'
 
 const Connect = () => {
     const navigate = useNavigate()
@@ -14,15 +15,7 @@ const Connect = () => {
         <div className={styles.container}>
 
             {/* Header */}
-            <div className={styles.header}>
-                <button className={styles.backBtn} onClick={() => navigate(-1)}>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/>
-                    </svg>
-                </button>
-                <span className={styles.headerTitle}>Подписка</span>
-                <div className={styles.headerSpacer} />
-            </div>
+            <Header title="Подключение" />
 
             {/* Инструкция — растягивается */}
             <div className={styles.infoCard}>
