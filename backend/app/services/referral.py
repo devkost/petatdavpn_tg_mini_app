@@ -30,7 +30,15 @@ class ReferralService:
             .where(User.tg_id == tg_id)
         )
 
-        return result.scalars().all()
+        users = result.scalars().all()
+        return [
+            {
+                "tg_id": u.tg_id,
+                "username": u.username,
+                "created_at": u.created_at,
+            }
+            for u in users
+        ]
     
 
     @staticmethod
