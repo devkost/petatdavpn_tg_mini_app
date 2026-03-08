@@ -133,6 +133,11 @@
     flex-shrink: 0;
     transition: opacity 0.15s ease, transform 0.1s ease;
 }
+
+.copyBtnDone {
+    color: #22C55E;
+}
+
 .copyBtn:hover  { opacity: 0.88; }
 .copyBtn:active { transform: scale(0.96); }
 
