@@ -54,4 +54,4 @@ class ReferralService:
             .where(User.tg_id == tg_id)
         )
         
-        return len(result.scalars().all())
+        return result.scalar() or 0
