@@ -16,8 +16,9 @@ const Referral = () => {
     const handleCopy = () => {
         navigator.clipboard.writeText(refLink)
     }
-
+    
     const { tgId } = useTgUser()
+    const [loading, setLoading] = useState(true)
     const [countRef, setRefCount] = useState(null)
 
     useEffect(() => {
@@ -39,6 +40,8 @@ const Referral = () => {
         }
         fetchCountReferrals()
     }, [])
+
+    if (loading) return <div className="errorLoad">Загрузка...</div>
 
     return (
         <>
