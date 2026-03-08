@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import styles from './Home.module.css'
 import Header from '../../ui/Header/Header'
 import '../../styles/global.css'
+import useTgUser from '../../hooks/useTgUser'
 import { api } from '../../api'
 
 const getOS = () => {
@@ -15,12 +16,13 @@ const getOS = () => {
     return 'Устройство'
 }
 
-const Home = ({tgId}) => {
+const Home = () => {
     const navigate = useNavigate()
     const os = getOS()
 
     const [loading, setLoading] = useState(true)
     const [user, setUser] = useState(null)
+    const { tgId } = useTgUser()
 
     useEffect(() => {
         if (!tgId) {

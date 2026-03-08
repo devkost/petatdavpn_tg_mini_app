@@ -277,7 +277,7 @@
    МОБИЛЬНЫЕ / TG MINI APP (≤ 520px)
    ═══════════════════════════════════════════════════════════════ */
 @media (max-width: 520px) {
-    .container  { padding: 16px 16px; gap: 12px; }
+    .container  { padding: 16px; gap: 12px; }
     .card       { max-width: 100%; }
     .cardQuick  { max-width: 100%; }
     .inputWrap  { max-width: 100%; }

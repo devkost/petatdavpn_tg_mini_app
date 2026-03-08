@@ -16,7 +16,7 @@
     background: rgba(255, 255, 255, 0.05);
     border-radius: 15px;
     overflow: hidden;
-    flex-shrink: 0; /* benefits-карточка не растягивается */
+    flex-shrink: 0;
 }
 
 /* Карточка локаций — занимает всё свободное место */
@@ -150,9 +150,8 @@
 
     .card          { max-width: 100%; }
     .cardLocations { max-width: 100%; }
-    .btnChoose     { max-width: 100%; }
+    .btnChoose     { max-width: 100%; } 
 
-    .headerTitle   { font-size: 16px; }
     .listText      { font-size: 12px; }
     .locationBtn   { font-size: 14px; border-radius: 12px; }
     .btnChoose     { font-size: 15px; padding: 15px 0; }

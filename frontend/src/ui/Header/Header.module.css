@@ -62,5 +62,6 @@
    МОБИЛЬНЫЕ / TG MINI APP (≤ 520px)
    ═══════════════════════════════════════════════════════════════ */
 @media (max-width: 520px) {
-    .header    { max-width: 100%; }
+    .header        { max-width: 100%; }
+    .headerTitle   { font-size: 16px; }
 }

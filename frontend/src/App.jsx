@@ -9,7 +9,6 @@ import Connect from './components/Connect/Connect.jsx'
 
 const tg = window.Telegram?.WebApp
 const tgUser = tg?.initDataUnsafe?.user
-const tgId = tg?.initDataUnsafe?.user?.id
 const isTG = window.Telegram?.WebApp?.platform && 
              window.Telegram.WebApp.platform !== 'unknown'
 const startPage = isTG || tgUser ? '/home' : '/auth'
@@ -23,7 +22,7 @@ function App() {
                     <Routes>
                         <Route path='/' element={<Navigate to={startPage} replace />} />
                         <Route path='/auth' element={<Auth />} />
-                        <Route path='/home' element={<Home tgId={tgId} />} />
+                        <Route path='/home' element={<Home />} />
                         <Route path='/subscribe' element={<Subscribe />} />
                         <Route path='/referral' element={<Referral />} />
                         <Route path='/payment' element={<Payment />} />

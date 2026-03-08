@@ -1,6 +1,8 @@
-import { useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import styles from './Referral.module.css'
 import Header from '../../ui/Header/Header'
+import useTgUser from '../../hooks/useTgUser'
+import { api } from '../../api'
 
 const perks = [
     '+3 дня подписки',
@@ -9,13 +11,34 @@ const perks = [
 ]
 
 const Referral = () => {
-    const navigate = useNavigate()
-
     const refLink = 'https://t.me/petardavpnbot?start=ref_12345'
 
     const handleCopy = () => {
         navigator.clipboard.writeText(refLink)
     }
+
+    const { tgId } = useTgUser()
+    const [countRef, setRefCount] = useState(null)
+
+    useEffect(() => {
+        if (!tgId) {
+            console.error("Не удалось получить tg_id из Telegram WebApp")
+            setLoading(false)
+            return
+        }
+
+        const fetchCountReferrals = async () => {
+            try {
+                const data = await api.get(`/referrals/count/${tgId}`)
+                setRefCount(data)
+                setLoading(false)
+                console.log(data)
+            } catch (error) {
+                console.error("Ошибка загрузки", error)
+            }
+        }
+        fetchCountReferrals()
+    }, [])
 
     return (
         <>
@@ -24,7 +47,7 @@ const Referral = () => {
 
                 {/* Счётчик — свободный блок */}
                 <div className={styles.counterCard}>
-                    <span className={styles.counterValue}>0</span>
+                    <span className={styles.counterValue}>{ countRef ?? '0' }</span>
                     <span className={styles.counterLabel}>друзей приглашено</span>
                 </div>
 
