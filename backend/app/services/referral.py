@@ -1,5 +1,5 @@
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
+from sqlalchemy import select, func
 from app.models.user import User
 from app.models.referral import Referral
 
@@ -24,13 +24,21 @@ class ReferralService:
 
     @staticmethod
     async def get_referrals(session: AsyncSession, tg_id: int):
-        result = await session.execute(select(Referral).where(Referral.referrer_id == tg_id))
+        result = await session.execute(
+            select(func.count(Referral.id))
+            .join(User, User.id == Referral.referrer_id)
+            .where(User.tg_id == tg_id)
+        )
 
         return result.scalars().all()
     
 
     @staticmethod
     async def get_referrals_count(session: AsyncSession, tg_id: int):
-        result = await session.execute(select(Referral).where(Referral.referrer_id == tg_id))
+        result = await session.execute(
+            select(func.count(Referral.id))
+            .join(User, User.id == Referral.referrer_id)
+            .where(User.tg_id == tg_id)
+        )
         
         return len(result.scalars().all())
