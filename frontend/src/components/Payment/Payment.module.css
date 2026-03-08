@@ -102,7 +102,7 @@
     background: #151929;
     border-radius: 0 0 12px 12px;
     overflow-y: auto;
-    max-height: 180px;
+    max-height: 135px;
     border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
@@ -291,4 +291,5 @@
 
 :global(body.tg-app) .container {
     padding-top: var(--tg-header-height, 0px);
+    padding-bottom: 32px;
 }
