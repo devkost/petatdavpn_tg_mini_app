@@ -14,7 +14,7 @@ const Referral = () => {
     const { tgId } = useTgUser()
     const [loading, setLoading] = useState(true)
     const [countRef, setRefCount] = useState(null)
-    const refLink = `https://t.me/petardavpnbot?start=${tg_id}`
+    const refLink = `https://t.me/petardavpnbot?start=${tgId}`
     const [copied, setCopied] = useState(false)
 
     useEffect(() => {
