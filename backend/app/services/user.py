@@ -19,6 +19,7 @@ class UserService:
 
         user = User(tg_id=tg_id, username=username, email=email)
         session.add(user)
+        await session.flush()
 
         if referrer_tg_id:
             referrer = await session.execute(select(User).where(User.tg_id == referrer_tg_id))
