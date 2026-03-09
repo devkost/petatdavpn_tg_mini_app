@@ -44,7 +44,7 @@ const Connect = () => {
     const handleConnect = async () => {
         if (!configLink) return
         try { await navigator.clipboard.writeText(configLink) } catch {}
-        window.location.href = configLink
+        window.location.href = `happ://install-sub?url=${encodeURIComponent(configLink)}`
     }
 
     if (loading) return <div className="errorLoad">Загрузка...</div>
