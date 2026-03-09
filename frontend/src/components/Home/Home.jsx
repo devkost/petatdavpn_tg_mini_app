@@ -45,7 +45,7 @@ const Home = () => {
     }, [])
 
     const handleSupport = () => {
-        window.Telegram.WebApp.openTelegramLink('https://t.me/твой_юзернейм')
+        window.Telegram.WebApp.openTelegramLink('https://t.me/devkost001')
     }
 
     if (loading) return <div className="errorLoad">Загрузка...</div>
