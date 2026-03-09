@@ -64,7 +64,7 @@ const Subscribe = () => {
                     <span className={styles.cardTitle}>Доступные локации</span>
                 </div>
                 <div className={styles.grid}>
-                    {locations.map((code) => (
+                    {locations.map((loc) => (
                         <div key={loc.code} className={styles.locationBtn}>
                             <span className={styles.locationFlag}>{loc.flag}</span>
                             <span className={styles.locationCode}>{loc.code}</span>
