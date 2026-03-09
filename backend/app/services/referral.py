@@ -4,6 +4,8 @@ from sqlalchemy.orm import aliased
 from app.models.user import User
 from app.models.referral import Referral
 
+REFERRAL_BONUS = 100
+
 class ReferralService:
     @staticmethod
     async def create_referral(session: AsyncSession, new_user_id: int, referrer_tg_id: int) -> bool:
@@ -17,8 +19,11 @@ class ReferralService:
             referrer_id=new_user_id,
             referred_user_id=inviter.id
         )
-
         session.add(referral)
+
+        inviter.balance += REFERRAL_BONUS
+        session.add(inviter)
+
         await session.commit()
         return True
 
