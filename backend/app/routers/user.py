@@ -1,6 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
 from app.database import get_db
 from app.services.user import UserService
 
@@ -8,8 +7,8 @@ router = APIRouter(prefix="/api", tags=["api"])
 
 
 @router.post("/user/create")
-async def create_user(tg_id: int, username: str = None, referrer_tg_id: int = None, session: AsyncSession = Depends(get_db)):
-    user, is_new = await UserService.get_or_create(
+async def create_user(tg_id: int, username: str | None = None, referrer_tg_id: int | None = None, session: AsyncSession = Depends(get_db)):
+    user, is_new, referrer = await UserService.get_or_create(
         session=session,
         tg_id=tg_id,
         username=username,
@@ -27,7 +26,8 @@ async def create_user(tg_id: int, username: str = None, referrer_tg_id: int = No
             "email": user.email,
             "vpn_key": user.vpn_key
         },
-        "is_new": is_new
+        "is_new": is_new,
+        "referrer_vpn_key": referrer.vpn_key if referrer else None
     }
 
 @router.get("/user/{tg_id}")
@@ -39,9 +39,9 @@ async def get_user(tg_id: int, session: AsyncSession = Depends(get_db)):
 
 @router.post("/user/vpn-key")
 async def save_vpn_key(tg_id: int, vpn_key: str, session: AsyncSession = Depends(get_db)):
-    vpn_key = await UserService.save_vpn_key(session, tg_id, vpn_key)
+    result = await UserService.save_vpn_key(session, tg_id, vpn_key)
 
-    if not vpn_key:
-        raise HTTPException(404, f"Пользователь не найден") 
-    
-    return vpn_key
+    if not result:
+        raise HTTPException(404, f"Пользователь не найден")
+
+    return result

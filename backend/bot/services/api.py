@@ -36,7 +36,7 @@ async def save_vpn_key(tg_id: int, vpn_key = None):
             "vpn_key": vpn_key
         }
 
-        async with httpx.AsyncClient(timeout=120.0) as client:
+        async with httpx.AsyncClient(timeout=120.0, verify=False) as client:
             res = await client.post(f"{BASE_URL}/user/vpn-key", params=params)
             res.raise_for_status()
             return res.json()
