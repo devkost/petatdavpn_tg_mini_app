@@ -11,7 +11,14 @@ const benefits = [
     'Неограниченная пропускная способность',
 ]
 
-const locations = ['PL', 'NO', 'LV', 'SE', 'DE', 'KZ']
+const locations = [
+    { code: 'PL', flag: '🇵🇱' },
+    { code: 'NO', flag: '🇳🇴' },
+    { code: 'LV', flag: '🇱🇻' },
+    { code: 'SE', flag: '🇸🇪' },
+    { code: 'DE', flag: '🇩🇪' },
+    { code: 'KZ', flag: '🇰🇿' },
+]
 
 const Subscribe = () => {
     const navigate = useNavigate()
@@ -58,8 +65,9 @@ const Subscribe = () => {
                 </div>
                 <div className={styles.grid}>
                     {locations.map((code) => (
-                        <div className={styles.locationBtn}>
-                            {code}
+                        <div key={loc.code} className={styles.locationBtn}>
+                            <span className={styles.locationFlag}>{loc.flag}</span>
+                            <span className={styles.locationCode}>{loc.code}</span>
                         </div>
                     ))}
                 </div>

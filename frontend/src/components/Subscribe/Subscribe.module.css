@@ -108,16 +108,30 @@
 .locationBtn {
     display: flex;
     align-items: center;
+    flex-direction: column;
     justify-content: center;
 
     background: #151929;
     border: none;
     border-radius: 14px;
 
+    gap: 4px;
+
     font-size: 16px;
     font-weight: 700;
     color: #ffffff;
     transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.locationFlag {
+    font-size: 28px;
+    line-height: 1;
+}
+
+.locationCode {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.6);
 }
 
 /* ─── Кнопка выбора тарифа ───────────────────────────────────── */
