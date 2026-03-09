@@ -35,14 +35,14 @@ const Home = () => {
             try {
                 const data = await api.get(`/user/${tgId}`)
                 setUser(data)
-                setLoading(false)
-                console.log(data)
             } catch (error) {
                 console.error("Ошибка загрузки", error)
+            } finally {
+                setLoading(false)
             }
         }
         fetchUser()
-    }, [])
+    }, [tgId])
 
     const handleSupport = () => {
         window.Telegram.WebApp.openTelegramLink('https://t.me/devkost001')
@@ -71,7 +71,9 @@ const Home = () => {
                                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
                             </svg>
                             <span className={styles.cardLabel}>Истекает через</span>
-                            <span className={`${styles.cardValue} ${styles.cardValueOrange}`}>3 дня</span>
+                            <span className={`${styles.cardValue} ${styles.cardValueOrange}`}>
+                                {user.is_active ? `${Math.floor(user.balance / 5)} дн.` : '—'}
+                            </span>
                         </div>
                     </div>
 

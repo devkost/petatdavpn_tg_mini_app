@@ -1,13 +1,20 @@
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select
 from app.models.payment import Payment
 from app.models.user import User
-from datetime import datetime
+from app.services.marzban import set_user_status
+from datetime import datetime, timezone
 
 class PaymentService:
     @staticmethod
-    async def create_payment(session: AsyncSession, user_id: int, amount: int):
+    async def create_payment(session: AsyncSession, tg_id: int, amount: int):
+        result = await session.execute(select(User).where(User.tg_id == tg_id))
+        user = result.scalar_one_or_none()
+        if not user:
+            return None
+
         payment = Payment(
-            user_id=user_id,
+            user_id=user.id,
             amount=amount,
             status="pending"
         )
@@ -17,7 +24,7 @@ class PaymentService:
         await session.refresh(payment)
 
         return payment
-    
+
     @staticmethod
     async def confirm_payment(session: AsyncSession, payment_id: int):
         payment = await session.get(Payment, payment_id)
@@ -25,7 +32,7 @@ class PaymentService:
             return None
 
         payment.status = "paid"
-        payment.created_at = datetime.utcnow()
+        payment.paid_at = datetime.now(timezone.utc)
 
         user = await session.get(User, payment.user_id)
         if not user:
@@ -33,5 +40,11 @@ class PaymentService:
             return None
 
         user.balance += payment.amount
+        user.is_active = True
+
         await session.commit()
+
+        if user.vpn_key:
+            await set_user_status(user.vpn_key, active=True)
+
         return payment

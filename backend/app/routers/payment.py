@@ -8,12 +8,15 @@ router = APIRouter(prefix="/api", tags=["api"])
 
 
 @router.post("/payment/create")
-async def create_payment(user_id: int, amount: int, session: AsyncSession = Depends(get_db)):
+async def create_payment(tg_id: int, amount: int, session: AsyncSession = Depends(get_db)):
     payment = await PaymentService.create_payment(
         session=session,
-        user_id=user_id, 
+        tg_id=tg_id,
         amount=amount
     )
+
+    if not payment:
+        raise HTTPException(404, "Пользователь не найден")
 
     return payment
 

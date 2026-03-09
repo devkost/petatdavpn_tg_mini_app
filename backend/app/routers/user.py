@@ -16,7 +16,7 @@ async def create_user(tg_id: int, username: str = None, referrer_tg_id: int = No
     )
 
     if not user:
-        return HTTPException(404, f"Пользователь не создан")
+        raise HTTPException(404, f"Пользователь не создан")
 
     return {
         "user": user,

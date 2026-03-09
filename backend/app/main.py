@@ -14,7 +14,7 @@ async def daily_charge():
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    scheduler.add_job(daily_charge, "interval", minutes=1)
+    scheduler.add_job(daily_charge, "cron", hour=0, minute=0)
     scheduler.start()
     yield
     scheduler.shutdown()

@@ -12,21 +12,15 @@ async def get_referrals(tg_id: int, session: AsyncSession = Depends(get_db)):
         session=session,
         tg_id=tg_id
     )
-    
-    if not referrals:
-        return HTTPException(404, f"Пользователь не найден")
 
     return referrals
 
 
 @router.get("/referrals/count/{tg_id}")
 async def get_referrals_count(tg_id: int, session: AsyncSession = Depends(get_db)):
-    users = await ReferralService.get_referrals_count(
+    count = await ReferralService.get_referrals_count(
         session=session,
         tg_id=tg_id,
     )
 
-    if not users:
-        return HTTPException(404, f"Пользователь не найден")
-
-    return users
+    return count

@@ -26,14 +26,14 @@ const Referral = () => {
             try {
                 const data = await api.get(`/referrals/count/${tgId}`)
                 setRefCount(data)
-                setLoading(false)
-                console.log(data)
             } catch (error) {
                 console.error("Ошибка загрузки", error)
+            } finally {
+                setLoading(false)
             }
         }
         fetchCountReferrals()
-    }, [])
+    }, [tgId])
 
 
     const refLink = `https://t.me/petardavpnbot?start=${tgId}`

@@ -41,6 +41,12 @@ const Connect = () => {
         window.Telegram.WebApp.openLink('https://apps.apple.com/app/happ-proxy-utility/id6504287215')
     }
 
+    const handleConnect = async () => {
+        if (!configLink) return
+        try { await navigator.clipboard.writeText(configLink) } catch {}
+        window.location.href = configLink
+    }
+
     if (loading) return <div className="errorLoad">Загрузка...</div>
 
     return (
@@ -51,11 +57,11 @@ const Connect = () => {
 
             {/* Инструкция */}
             <div className={styles.infoCard}>
-                <span className={styles.infoTitle}>Скачайте приложение</span>
+                <span className={styles.infoTitle}>Как подключиться</span>
                 <span className={styles.infoDesc}>
-                    Скачайте приложение Happ,{'\n'}
-                    нажмите "Подключиться" и{'\n'}
-                    подписка добавится автоматически
+                    1. Скачайте приложение Happ{'\n'}
+                    2. Нажмите "Подключиться" — ссылка откроется в Happ{'\n'}
+                    3. Если не открылось — скопируйте ссылку и вставьте вручную
                 </span>
             </div>
 
@@ -97,6 +103,7 @@ const Connect = () => {
             {/* Подключиться */}
             <button
                 className={`${styles.btnBlue} ${styles.btnFinish}`}
+                onClick={handleConnect}
                 disabled={!configLink}
             >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">

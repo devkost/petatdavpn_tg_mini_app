@@ -1,7 +1,7 @@
 const useTgUser = () => {
     const tgUser = window.Telegram?.WebApp?.initDataUnsafe?.user
     return {
-        tgId: tgUser?.id ?? 'None',
+        tgId: tgUser?.id ?? null,
         username: tgUser?.username ?? 'none'
     }
 }
