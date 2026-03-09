@@ -15,7 +15,7 @@ async def init_user(tg_id: int, username = None, referrer_tg_id = None ) -> dict
         if referrer_tg_id is not None:
             params["referrer_tg_id"] = referrer_tg_id
 
-        async with httpx.AsyncClient(timeout=10.0) as client:
+        async with httpx.AsyncClient(timeout=120.0) as client:
             res = await client.post(f"{BASE_URL}/user/create", params=params)
             res.raise_for_status()
 
@@ -36,7 +36,7 @@ async def save_vpn_key(tg_id: int, vpn_key = None):
             "vpn_key": vpn_key
         }
 
-        async with httpx.AsyncClient(timeout=10.0) as client:
+        async with httpx.AsyncClient(timeout=120.0) as client:
             res = await client.post(f"{BASE_URL}/user/vpn-key", params=params)
             res.raise_for_status()
             return res.json()
