@@ -35,3 +35,16 @@ class UserService:
         await session.refresh(user)
 
         return user, True
+    
+    @staticmethod
+    async def save_vpn_key(session: AsyncSession, tg_id: int, vpn_key: str):
+        result = await session.execute(select(User).where(User.tg_id == tg_id))
+        user = result.scalar_one_or_none()
+
+        if not user:
+            return False
+        
+        user.vpn_key = vpn_key
+        await session.commit()
+
+        return user, True

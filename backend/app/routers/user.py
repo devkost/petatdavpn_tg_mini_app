@@ -29,3 +29,12 @@ async def get_user(tg_id: int, session: AsyncSession = Depends(get_db)):
     if not user:
         raise HTTPException(404, f"Пользователь не найден")
     return user
+
+@router.post("/user/vpn-key")
+async def save_vpn_key(tg_id: int, vpn_key: str, session: AsyncSession = Depends(get_db)):
+    vpn_key = await UserService.save_vpn_key(session, tg_id, vpn_key)
+
+    if not vpn_key:
+        raise HTTPException(404, f"Пользователь не найден") 
+    
+    return vpn_key

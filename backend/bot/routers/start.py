@@ -3,7 +3,8 @@ from aiogram import Router
 from aiogram.types import Message
 from aiogram.filters import CommandStart, CommandObject
 from bot.keyboards.start import start_keyboard
-from bot.services.api import init_user
+from bot.services.api import init_user, save_vpn_key
+from bot.services.marzban import create_vpn_user
 
 router = Router()
 
@@ -32,6 +33,10 @@ async def cmd_start(message: Message, command: CommandObject):
             f"Добро пожаловать в <b>PetardaVPN</b> 🚀\n"
             f"Ты успешно зарегистрирован!"
         )
+
+        sub_url = await create_vpn_user(f"user_{message.from_user.id}")
+        if sub_url:
+            await save_vpn_key(tg_id=message.from_user.id, vpn_key=sub_url)
     else:
         text = (
             f"👋 С возвращением, {message.from_user.first_name}!\n\n"
