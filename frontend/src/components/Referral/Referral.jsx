@@ -14,8 +14,6 @@ const Referral = () => {
     const { tgId } = useTgUser()
     const [loading, setLoading] = useState(true)
     const [countRef, setRefCount] = useState(null)
-    const refLink = `https://t.me/petardavpnbot?start=${tgId}`
-    const [copied, setCopied] = useState(false)
 
     useEffect(() => {
         if (!tgId) {
@@ -38,10 +36,13 @@ const Referral = () => {
     }, [])
 
 
-    const handleCopy = async () => {
-        await navigator.clipboard.writeText(refLink)
-        setCopied(true)
-        setTimeout(() => setCopied(false), 3000)
+    const refLink = `https://t.me/petardavpnbot?start=${tgId}`
+    const handleShare = () => {
+        const text = 'Присоединяйся к PetardaVPN!'
+        
+        window.Telegram.WebApp.openTelegramLink(
+            `https://t.me/share/url?url=${encodeURIComponent(refLink)}&text=${encodeURIComponent(text)}`
+        )
     }
 
     if (loading) return <div className="errorLoad">Загрузка...</div>
@@ -79,7 +80,7 @@ const Referral = () => {
                         </svg>
                         <span className={styles.refLinkText}>https://t.me/petardavpnbot?start={tgId}</span>
                     </div>
-                    <button className={`${styles.copyBtn} ${copied ? styles.copyBtnDone : ''}`} onClick={handleCopy}>
+                    <button className={`${styles.copyBtn} ${copied ? styles.copyBtnDone : ''}`} onClick={handleShare}>
                         {copied ? (
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                 <polyline points="20 6 9 17 4 12"/>

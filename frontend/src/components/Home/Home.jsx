@@ -44,13 +44,8 @@ const Home = () => {
         fetchUser()
     }, [])
 
-    const handleShare = () => {
-        const refLink = `https://t.me/petardavpnbot?start=${tgId}`
-        const text = 'Присоединяйся к PetardaVPN!'
-        
-        window.Telegram.WebApp.openTelegramLink(
-            `https://t.me/share/url?url=${encodeURIComponent(refLink)}&text=${encodeURIComponent(text)}`
-        )
+    const handleSupport = () => {
+        window.Telegram.WebApp.openTelegramLink('https://t.me/твой_юзернейм')
     }
 
     if (loading) return <div className="errorLoad">Загрузка...</div>
@@ -123,7 +118,7 @@ const Home = () => {
                     </button>
 
                     {/* Поддержка */}
-                    <button className={`${styles.btn} ${styles.btnDark}`} onClick={handleShare}>
+                    <button className={`${styles.btn} ${styles.btnDark}`} onClick={handleSupport}>
                         <span className={styles.btnLeft}>
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
