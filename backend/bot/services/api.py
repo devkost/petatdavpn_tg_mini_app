@@ -18,12 +18,15 @@ async def init_user(tg_id: int, username = None, referrer_tg_id = None ) -> dict
         async with httpx.AsyncClient(timeout=10.0) as client:
             res = await client.post(f"{BASE_URL}/user/create", params=params)
             res.raise_for_status()
+
+
             return res.json()
     except httpx.ConnectTimeout:
         print("API недоступен — таймаут")
         return None
     except httpx.HTTPStatusError as e:
         print(f"Ошибка API: {e.response.status_code}")
+        print(f"Детали: {e.response.text}")
         return None
     
 async def save_vpn_key(tg_id: int, vpn_key = None):

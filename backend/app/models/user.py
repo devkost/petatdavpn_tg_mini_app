@@ -17,7 +17,7 @@ class User(Base):
     username:   Mapped[str|None] = mapped_column(String(64))
     password_hash: Mapped[str|None] = mapped_column(String(256))
     is_active:  Mapped[bool]     = mapped_column(Boolean, default=False)
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
     balance:    Mapped[int]      = mapped_column(BigInteger, nullable=False, default=0, server_default='0')
     vpn_key:    Mapped[str|None] = mapped_column(String(512))
 
