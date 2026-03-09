@@ -44,7 +44,7 @@ const Connect = () => {
     const handleConnect = () => {
         if (!configLink) return
         const deeplink = `happ://install-sub?url=${encodeURIComponent(configLink)}`
-        window.Telegram.WebApp.openLink(deeplink)
+        window.location.href = deeplink
     }
 
     if (loading) return <div className="errorLoad">Загрузка...</div>
