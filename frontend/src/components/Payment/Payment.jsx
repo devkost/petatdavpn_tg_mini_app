@@ -74,10 +74,8 @@ const Payment = () => {
 
     return (
         <div className={styles.container}>
-
             <Header title="Пополнение" />
 
-            {/* Способ оплаты */}
             <div className={styles.card}>
                 <div className={styles.cardHeader}>
                     <div className={styles.cardIcon}>
@@ -123,7 +121,6 @@ const Payment = () => {
                 )}
             </div>
 
-            {/* Быстрый выбор */}
             <div className={styles.cardQuick}>
                 <div className={styles.cardHeader}>
                     <div className={styles.cardIcon}>
@@ -147,7 +144,6 @@ const Payment = () => {
                 </div>
             </div>
 
-            {/* Поле ввода */}
             <div className={styles.inputWrap}>
                 <input
                     className={styles.amountInput}
@@ -166,7 +162,6 @@ const Payment = () => {
                 <span className={styles.currencyLabel}>₽</span>
             </div>
 
-            {/* Инфо блок */}
             <div className={styles.infoBlock}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={styles.infoIcon}>
                     <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
@@ -177,7 +172,6 @@ const Payment = () => {
                 </span>
             </div>
 
-            {/* Кнопка */}
             <button className={styles.btnPay} disabled={amount <= 0}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/>
