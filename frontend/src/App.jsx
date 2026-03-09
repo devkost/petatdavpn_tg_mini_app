@@ -7,13 +7,14 @@ import Referral from './components/Referral/Referral.jsx'
 import Payment from './components/Payment/Payment.jsx'
 import Connect from './components/Connect/Connect.jsx'
 
+window.Telegram.WebApp.expand()
+window.Telegram.WebApp.requestFullscreen()
+
 const tg = window.Telegram?.WebApp
 const tgUser = tg?.initDataUnsafe?.user
 const isTG = window.Telegram?.WebApp?.platform && 
              window.Telegram.WebApp.platform !== 'unknown'
 const startPage = isTG || tgUser ? '/home' : '/auth'
-window.Telegram.WebApp.expand()
-window.Telegram.WebApp.requestFullscreen()
 
 function App() {
     return (
