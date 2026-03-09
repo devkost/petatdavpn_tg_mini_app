@@ -45,8 +45,7 @@ async def create_vpn_user(username: str) -> str | None:
         return None
 
 
-async def set_user_status(vpn_key: str, active: bool) -> bool:
-    username = vpn_key.rstrip("/").split("/")[-1] if vpn_key else None
+async def set_user_status(username: str, active: bool) -> bool:
     if not username:
         return False
     status = "active" if active else "disabled"

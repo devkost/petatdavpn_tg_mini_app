@@ -23,7 +23,7 @@ async def cmd_start(message: Message, command: CommandObject):
         referrer_tg_id=referrer_tg_id
     )
 
-    if not user:
+    if not user or not message.from_user:
         await message.answer("Произошла ошибка. Попробуй ещё раз.")
         return
 
@@ -37,9 +37,9 @@ async def cmd_start(message: Message, command: CommandObject):
         sub_url = await create_vpn_user(f"{message.from_user.id}")
         if sub_url:
             await save_vpn_key(tg_id=message.from_user.id, vpn_key=sub_url)
-            if user.get("referrer_vpn_key"):
-                await set_user_status(sub_url, active=True)
-                await set_user_status(user["referrer_vpn_key"], active=True)
+            if user.get("referrer_tg_id"):
+                await set_user_status(str(message.from_user.id), active=True)
+                await set_user_status(str(user["referrer_tg_id"]), active=True)
     else:
         text = (
             f"👋 С возвращением, {message.from_user.first_name}!\n\n"

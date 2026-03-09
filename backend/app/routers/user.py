@@ -27,7 +27,7 @@ async def create_user(tg_id: int, username: str | None = None, referrer_tg_id: i
             "vpn_key": user.vpn_key
         },
         "is_new": is_new,
-        "referrer_vpn_key": referrer.vpn_key if referrer else None
+        "referrer_tg_id": referrer.tg_id if referrer else None
     }
 
 @router.get("/user/{tg_id}")
