@@ -13,8 +13,8 @@ class Payment(Base):
     user_id:      Mapped[int]            = mapped_column(ForeignKey("users.id"))
     amount:       Mapped[int]            = mapped_column(Integer)
     status:       Mapped[str]            = mapped_column(String(16))
-    created_at:   Mapped[datetime]       = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc))
-    paid_at:      Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    created_at:   Mapped[datetime]       = mapped_column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
+    paid_at:      Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
     # Связь
     user: Mapped["User"] = relationship(back_populates="payments")

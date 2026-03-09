@@ -31,9 +31,9 @@ class UserService:
                     referred_user_id=user.id
                 )
                 session.add(referral)
-                referrer.balance += 50
+                referrer.balance = (referrer.balance or 0) + 50
                 referrer.is_active = True
-                user.balance += 50
+                user.balance = (user.balance or 0) + 50
                 user.is_active = True
                 referrer_with_bonus = referrer
 
