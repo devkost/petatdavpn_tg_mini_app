@@ -24,6 +24,8 @@ const Home = () => {
     const [user, setUser] = useState(null)
     const { tgId } = useTgUser()
 
+    const defaultUser = { is_active: false, balance: 0 }
+
     useEffect(() => {
         if (!tgId) {
             console.error("Не удалось получить tg_id из Telegram WebApp")
@@ -34,7 +36,7 @@ const Home = () => {
         const fetchUser = async () => {
             try {
                 const data = await api.get(`/user/${tgId}`)
-                setUser(data)
+                setUser(data ?? defaultUser)
             } catch (error) {
                 console.error("Ошибка загрузки", error)
             } finally {
@@ -45,10 +47,12 @@ const Home = () => {
     }, [tgId])
 
     const handleSupport = () => {
-        window.Telegram.WebApp.openTelegramLink('https://t.me/devkost001')
+        window.Telegram?.WebApp?.openTelegramLink('https://t.me/devkost001')
     }
 
     if (loading) return <div className="errorLoad">Загрузка...</div>
+
+    const userData = user ?? defaultUser
 
     return (
         <>
@@ -63,7 +67,7 @@ const Home = () => {
                                 <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
                             </svg>
                             <span className={styles.cardLabel}>Статус</span>
-                            <span className={`${styles.cardValue} ${user.is_active ? styles.cardValueGreen : styles.cardValueRed}`}>{user.is_active ? "Активна" : "Не активна"}</span>
+                            <span className={`${styles.cardValue} ${userData.is_active ? styles.cardValueGreen : styles.cardValueRed}`}>{userData.is_active ? "Активна" : "Не активна"}</span>
                         </div>
 
                         <div className={styles.card}>
@@ -72,7 +76,7 @@ const Home = () => {
                             </svg>
                             <span className={styles.cardLabel}>Истекает через</span>
                             <span className={`${styles.cardValue} ${styles.cardValueOrange}`}>
-                                {user.is_active ? `${Math.floor(user.balance / 5)} дн.` : '—'}
+                                {userData.is_active ? `${Math.floor(userData.balance / 5)} дн.` : '—'}
                             </span>
                         </div>
                     </div>
@@ -81,7 +85,7 @@ const Home = () => {
                     <div className={styles.cardsRowCenter}>
                         <div className={styles.card}>
                             <span className={styles.cardLabel}>Баланс</span>
-                            <span className={styles.cardValue}>{user.balance.toLocaleString('de-DE')} ₽</span>
+                            <span className={styles.cardValue}>{userData.balance.toLocaleString('de-DE')} ₽</span>
                         </div>
                     </div>
                 </div>
