@@ -34,7 +34,7 @@ async def cmd_start(message: Message, command: CommandObject):
             f"Ты успешно зарегистрирован!"
         )
 
-        sub_url = await create_vpn_user(f"user_{message.from_user.id}")
+        sub_url = await create_vpn_user(f"{message.from_user.id}")
         if sub_url:
             await save_vpn_key(tg_id=message.from_user.id, vpn_key=sub_url)
     else:

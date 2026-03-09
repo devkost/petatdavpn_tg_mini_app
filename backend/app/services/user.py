@@ -47,4 +47,4 @@ class UserService:
         user.vpn_key = vpn_key
         await session.commit()
 
-        return user, True
+        return user

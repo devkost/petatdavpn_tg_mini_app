@@ -19,7 +19,13 @@ async def create_user(tg_id: int, username: str = None, referrer_tg_id: int = No
         raise HTTPException(404, f"Пользователь не создан")
 
     return {
-        "user": user,
+        "user": {
+            "id": user.id,
+            "tg_id": user.tg_id,
+            "username": user.username,
+            "email": user.email,
+            "vpn_key": user.vpn_key
+        },
         "is_new": is_new
     }
 
