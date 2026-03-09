@@ -167,6 +167,6 @@
 
 /* ─── TG Mini App — отступ под шапку ────────────────────────── */
 :global(body.tg-app) .container {
-    padding-top: max(var(--tg-header-height, 0px), env(safe-area-inset-top));
-    padding-bottom: max(32px, env(safe-area-inset-bottom));
+    padding-top: calc(var(--tg-header-height, 0px));
+    padding-bottom: 32px;
 }

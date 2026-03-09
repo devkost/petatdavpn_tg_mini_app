@@ -3,9 +3,6 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 
-window.Telegram.WebApp.expand()
-window.Telegram.WebApp.requestFullscreen()
-
 const tg = window.Telegram?.WebApp
 
 if (tg?.platform && tg.platform !== 'unknown') {
@@ -18,8 +15,11 @@ if (tg?.platform && tg.platform !== 'unknown') {
     if (platform === 'android')                          document.body.classList.add('tg-android')
     if (platform === 'tdesktop' || platform === 'macos') document.body.classList.add('tg-desktop')
 
-    const safeTop = tg.safeAreaInset?.top ?? 0
-    const finalPadding = (platform === 'tdesktop' || platform === 'macos') ? 32 : safeTop
+    const safeTop        = tg.safeAreaInset?.top ?? 0
+    const contentSafeTop = tg.contentSafeAreaInset?.top ?? 0
+    const totalTop       = safeTop + contentSafeTop
+
+    const finalPadding = (platform === 'tdesktop' || platform === 'macos') ? 32 : totalTop
 
     document.documentElement.style.setProperty('--tg-header-height', `${finalPadding}px`)
 }
