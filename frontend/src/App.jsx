@@ -20,24 +20,48 @@ function App() {
         async function initTg() {
             if (!tg) return
 
-            try {
-                init()
-            } catch {}
-
-            if (viewport.mount.isAvailable()) {
-                await viewport.mount()
-                viewport.expand()
-            }
+            try { init() } catch {}
 
             if (viewport.requestFullscreen.isAvailable()) {
-                if (tg?.platform !== 'tdesktop' && tg?.platform !== 'macos') {
-                    await viewport.requestFullscreen()
-
-                    document.body.classList.add('tg-app')
-                    const finalPadding = 100
-                    document.documentElement.style.setProperty('--tg-header-height', `${finalPadding}px`)
+                await viewport.requestFullscreen()
+            } else {
+                try {
+                    window.Telegram.WebApp.requestFullscreen()
+                } catch(e) {
+                    console.log('fullscreen error:', e)
                 }
-            } 
+            }
+
+            const platform = tg.platform?.toLowerCase()
+
+            if (viewport.requestFullscreen.isAvailable()) {
+                if (platform !== 'tdesktop' && platform !== 'macos') {
+                    await viewport.requestFullscreen()
+                }
+            }
+
+            console.log('requestFullscreen available:', viewport.requestFullscreen.isAvailable())
+            console.log('platform:', platform)
+            if (platform && (platform === 'ios' || platform === 'android')) {
+                tg.ready()
+                document.body.classList.add('tg-app')
+            }
+
+            const applyPadding = () => {
+                const platform = tg.platform?.toLowerCase()
+                const safeTop        = tg.safeAreaInset?.top ?? 0
+                const contentSafeTop = tg.contentSafeAreaInset?.top ?? 0
+                const totalTop       = safeTop + contentSafeTop
+                const finalPadding   = (platform === 'tdesktop' || platform === 'macos') ? 32 : totalTop
+
+                console.log('applyPadding:', { safeTop, contentSafeTop, finalPadding })
+                document.documentElement.style.setProperty('--tg-header-height', `${finalPadding}px`)
+            }
+
+            tg.onEvent('safeAreaChanged', applyPadding)
+            tg.onEvent('contentSafeAreaChanged', applyPadding)
+
+            applyPadding()
         }
         initTg()
     }, [])
