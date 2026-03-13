@@ -27,12 +27,17 @@ function App() {
                 }
 
                 if (viewport.requestFullscreen.isAvailable()) {
-                    await viewport.requestFullscreen()
-                }
+                    if (tg?.platform !== 'tdesktop' && tg?.platform !== 'macos') {
+                        await viewport.requestFullscreen()
+
+                        document.body.classList.add('tg-app')
+                        const finalPadding = 100
+                        document.documentElement.style.setProperty('--tg-header-height', `${finalPadding}px`)
+                    }
+                } }
             }
-        }
-        initTg()
-    }, [])
+            initTg()
+        }, [])
 
     return (
         <>
