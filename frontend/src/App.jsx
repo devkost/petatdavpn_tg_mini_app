@@ -1,5 +1,7 @@
 import './App.css'
+import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { init, isTMA, viewport } from '@telegram-apps/sdk'
 import Auth from './components/Auth/Auth.jsx'
 import Home from './components/Home/Home.jsx'
 import Subscribe from './components/Subscribe/Subscribe.jsx'
@@ -14,6 +16,24 @@ const isTG = window.Telegram?.WebApp?.platform &&
 const startPage = isTG || tgUser ? '/home' : '/auth'
 
 function App() {
+    useEffect(() => {
+        async function initTg() {
+            if (await isTMA()) {
+                init()
+
+                if (viewport.mount.isAvailable()) {
+                    await viewport.mount()
+                    viewport.expand()
+                }
+
+                if (viewport.requestFullscreen.isAvailable()) {
+                    await viewport.requestFullscreen()
+                }
+            }
+        }
+        initTg()
+    }, [])
+
     return (
         <>
             <div className='grid-lines'></div>
