@@ -18,26 +18,29 @@ const startPage = isTG || tgUser ? '/home' : '/auth'
 function App() {
     useEffect(() => {
         async function initTg() {
-            if (await isTMA()) {
+            if (!tg) return
+
+            try {
                 init()
+            } catch {}
 
-                if (viewport.mount.isAvailable()) {
-                    await viewport.mount()
-                    viewport.expand()
-                }
-
-                if (viewport.requestFullscreen.isAvailable()) {
-                    if (tg?.platform !== 'tdesktop' && tg?.platform !== 'macos') {
-                        await viewport.requestFullscreen()
-
-                        document.body.classList.add('tg-app')
-                        const finalPadding = 100
-                        document.documentElement.style.setProperty('--tg-header-height', `${finalPadding}px`)
-                    }
-                } }
+            if (viewport.mount.isAvailable()) {
+                await viewport.mount()
+                viewport.expand()
             }
-            initTg()
-        }, [])
+
+            if (viewport.requestFullscreen.isAvailable()) {
+                if (tg?.platform !== 'tdesktop' && tg?.platform !== 'macos') {
+                    await viewport.requestFullscreen()
+
+                    document.body.classList.add('tg-app')
+                    const finalPadding = 100
+                    document.documentElement.style.setProperty('--tg-header-height', `${finalPadding}px`)
+                }
+            } 
+        }
+        initTg()
+    }, [])
 
     return (
         <>
