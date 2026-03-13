@@ -22,21 +22,19 @@ function App() {
 
             try { init() } catch {}
 
-            if (viewport.requestFullscreen.isAvailable()) {
-                await viewport.requestFullscreen()
-            } else {
-                try {
-                    window.Telegram.WebApp.requestFullscreen()
-                } catch(e) {
-                    console.log('fullscreen error:', e)
-                }
-            }
-
             const platform = tg.platform?.toLowerCase()
+            const isMobile = platform !== 'tdesktop' && platform !== 'macos'
 
-            if (viewport.requestFullscreen.isAvailable()) {
-                if (platform !== 'tdesktop' && platform !== 'macos') {
+            if (isMobile) {
+                if (viewport.requestFullscreen.isAvailable()) {
                     await viewport.requestFullscreen()
+                } else {
+                    try {
+                        await window.Telegram.WebApp.requestFullscreen()
+                    } catch(e) {
+                        console.log('fullscreen error:', e)
+                        window.Telegram.WebApp.expand()
+                    }
                 }
             }
 
