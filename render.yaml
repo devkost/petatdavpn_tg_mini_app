@@ -40,7 +40,7 @@ services:
     name: vpn-bot
     runtime: docker
     dockerfilePath: ./backend/Dockerfile
-    dockerContext: ./backend/requirements.txt
+    dockerContext: ./backend
     plan: free
     dockerCommand: alembic upgrade head && python -m bot.main
     envVars:
