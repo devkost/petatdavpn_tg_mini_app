@@ -57,7 +57,7 @@ const Home = () => {
     return (
         <>
             <div className={styles.container}>
-                <Header title="PetardaVPN" tgBtn/>
+                <Header title="PetardaVPN(Plaтега)" tgBtn/>
 
                 <div className={styles.cards}>
                     {/* Верхний ряд: 2 карточки */}

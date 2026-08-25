@@ -164,9 +164,3 @@
     align-items: center;
     justify-content: center;
 }
-
-/* ─── TG Mini App — отступ под шапку ────────────────────────── */
-:global(body.tg-app) .container {
-    padding-top: calc(var(--tg-header-height, 0px));
-    padding-bottom: 32px;
-}

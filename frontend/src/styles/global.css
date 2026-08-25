@@ -5,3 +5,8 @@
     flex: 1;
     font-size: 16px;
 }
+
+body.tg-app .container {
+    padding-top: calc(var(--tg-header-height, 0px));
+    padding-bottom: 32px;
+}

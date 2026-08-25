@@ -8,6 +8,9 @@ import Subscribe from './components/Subscribe/Subscribe.jsx'
 import Referral from './components/Referral/Referral.jsx'
 import Payment from './components/Payment/Payment.jsx'
 import Connect from './components/Connect/Connect.jsx'
+import Profile from './components/Profile/Profile.jsx'
+import PrivacyPolicy from './components/PrivacyPolicy/PrivacyPolicy.jsx'
+import UserAgreement from './components/UserAgreement/UserAgreement.jsx'
 
 const tg = window.Telegram?.WebApp
 const tgUser = tg?.initDataUnsafe?.user
@@ -77,6 +80,9 @@ function App() {
                         <Route path='/referral' element={<Referral />} />
                         <Route path='/payment' element={<Payment />} />
                         <Route path='/connect' element={<Connect />} />
+                        <Route path='/profile' element={<Profile />} />
+                        <Route path='/privacy-policy' element={<PrivacyPolicy />} />
+                        <Route path='/user-agreement' element={<UserAgreement />} />
                         <Route path='*' element={<Navigate to='/' replace />} />
                     </Routes>
                 </BrowserRouter>
