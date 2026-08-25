@@ -1,5 +1,10 @@
 import asyncio
 import logging
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 from aiogram import Bot, Dispatcher
 from aiogram.enums import ParseMode
 from aiogram.client.default import DefaultBotProperties
@@ -53,10 +58,9 @@ async def main():
         logger.info("🛑 Бот остановлен")
         await bot.session.close()
 
-if __name__ == "__main__":
-    try:
-        asyncio.run(main())
-    except KeyboardInterrupt:
-        logger.info("👋 Бот остановлен пользователем (Ctrl+C)")
-    except Exception as e:
-        logger.error(f"❌ Непредвиденная ошибка: {e}", exc_info=True)
+try:
+    asyncio.run(main())
+except KeyboardInterrupt:
+    logger.info("👋 Бот остановлен пользователем (Ctrl+C)")
+except Exception as e:
+    logger.error(f"❌ Непредвиденная ошибка: {e}", exc_info=True)
