@@ -10,6 +10,8 @@ class Settings(BaseSettings):
     marzban_username: str
     marzban_password: str
 
+    backend_url: str = "http://localhost:8000"
+
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 
 

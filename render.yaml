@@ -1,0 +1,65 @@
+databases:
+  - name: vpn-db
+    plan: free
+    databaseName: petardavpn
+    user: postgres
+
+services:
+  - type: web
+    name: vpn-backend
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: vpn-db
+          property: connectionString
+      - key: BOT_TOKEN
+        sync: false
+      - key: MARZBAN_URL
+        sync: false
+      - key: MARZBAN_USERNAME
+        sync: false
+      - key: MARZBAN_PASSWORD
+        sync: false
+      - key: ECHO_SQL
+        value: "False"
+      - key: PORT
+        value: "8000"
+      - key: BACKEND_URL
+        sync: false
+
+  - type: web
+    name: vpn-frontend
+    runtime: docker
+    dockerfilePath: ./frontend/Dockerfile
+    plan: free
+    envVars:
+      - key: VITE_API_URL
+        sync: false
+
+  - type: worker
+    name: vpn-bot
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    plan: free
+    startCommand: alembic upgrade head && python -m bot.main
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: vpn-db
+          property: connectionString
+      - key: BOT_TOKEN
+        sync: false
+      - key: MARZBAN_URL
+        sync: false
+      - key: MARZBAN_USERNAME
+        sync: false
+      - key: MARZBAN_PASSWORD
+        sync: false
+      - key: ECHO_SQL
+        value: "False"
+      - key: BACKEND_URL
+        sync: false

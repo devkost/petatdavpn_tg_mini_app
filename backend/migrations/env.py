@@ -8,7 +8,6 @@ sys.path.append(str(Path(__file__).parent.parent))
 
 from alembic import context
 from sqlalchemy import engine_from_config, pool
-from sqlalchemy.engine import Connection
 
 # Импортируем БАЗОВЫЙ класс (Base) и ВСЕ МОДЕЛИ, чтобы они были известны Alembic
 # ВАЖНО: Импортируем именно из app.database, а не пытаемся создать новый Base здесь

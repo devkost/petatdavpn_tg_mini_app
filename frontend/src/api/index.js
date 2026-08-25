@@ -1,5 +1,4 @@
-// const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api'
-const BASE_URL = "https://petatdavpntgminiapp-production.up.railway.app/api"
+const BASE_URL = import.meta.env.VITE_API_URL || "/api"
 
 export const api = {
     get: (url) => fetch(`${BASE_URL}${url}`)

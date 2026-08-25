@@ -1,6 +1,8 @@
 import httpx
 
-BASE_URL = "https://petatdavpntgminiapp-production.up.railway.app/api"
+from app.config import settings
+
+BASE_URL = settings.backend_url.rstrip("/") + "/api"
 
 async def init_user(tg_id: int, username = None, referrer_tg_id = None ) -> dict | None:
     try:
