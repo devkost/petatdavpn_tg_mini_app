@@ -2,7 +2,7 @@ databases:
   - name: vpn-db
     plan: free
     databaseName: petardavpn
-    user: postgres
+    user: vpn_user
 
 services:
   - type: web
@@ -45,7 +45,7 @@ services:
     runtime: docker
     dockerfilePath: ./backend/Dockerfile
     plan: free
-    startCommand: alembic upgrade head && python -m bot.main
+    dockerCommand: alembic upgrade head && python -m bot.main
     envVars:
       - key: DATABASE_URL
         fromDatabase:
