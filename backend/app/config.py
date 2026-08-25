@@ -3,7 +3,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     database_url: str
-    bot_token: str
+    bot_token: str | None = None
     echo_sql: bool = False
 
     marzban_url: str = ""
