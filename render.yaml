@@ -9,6 +9,7 @@ services:
     name: vpn-backend
     runtime: docker
     dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
     plan: free
     healthCheckPath: /health
     envVars:
@@ -29,6 +30,7 @@ services:
     name: vpn-frontend
     runtime: docker
     dockerfilePath: ./frontend/Dockerfile
+    dockerContext: ./frontend
     plan: free
     envVars:
       - key: VITE_API_URL
@@ -38,6 +40,7 @@ services:
     name: vpn-bot
     runtime: docker
     dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
     plan: free
     dockerCommand: alembic upgrade head && python -m bot.main
     envVars:
