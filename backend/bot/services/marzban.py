@@ -1,8 +1,10 @@
 import httpx
 
-MARZBAN_URL = "https://petardavpn.duckdns.org"
-MARZBAN_USER = "devkost"
-MARZBAN_PASS = "Zxcfdsa111"
+from app.config import settings
+
+MARZBAN_URL = settings.marzban_url
+MARZBAN_USER = settings.marzban_username
+MARZBAN_PASS = settings.marzban_password
 
 async def create_vpn_user(username: str) -> str | None:
     async with httpx.AsyncClient(timeout=120.0) as client:

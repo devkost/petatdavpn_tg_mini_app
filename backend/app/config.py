@@ -6,9 +6,9 @@ class Settings(BaseSettings):
     bot_token: str
     echo_sql: bool = False
 
-    marzban_url: str
-    marzban_username: str
-    marzban_password: str
+    marzban_url: str = ""
+    marzban_username: str = ""
+    marzban_password: str = ""
 
     backend_url: str = "http://localhost:8000"
 
