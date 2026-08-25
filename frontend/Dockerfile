@@ -2,10 +2,10 @@ FROM node:22.12-alpine AS builder
 
 WORKDIR /app
 
-COPY frontend/package*.json ./package*.json
+COPY package*.json ./
 RUN npm ci
 
-COPY frontend/ ./
+COPY . .
 RUN npm run build
 
 FROM nginx:alpine
