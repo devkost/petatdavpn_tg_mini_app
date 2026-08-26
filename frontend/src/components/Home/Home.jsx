@@ -133,6 +133,16 @@ const Home = () => {
                         </span>
                     </button>
                 </div>
+
+                <div className={styles.footer}>
+                    <button className={styles.footerLink} onClick={() => navigate('/privacy-policy')}>
+                        Политика конфиденциальности
+                    </button>
+                    <span className={styles.footerDot}>·</span>
+                    <button className={styles.footerLink} onClick={() => navigate('/user-agreement')}>
+                        Пользовательское соглашение
+                    </button>
+                </div>
             </div>
         </>
     )
