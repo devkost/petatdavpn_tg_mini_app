@@ -61,7 +61,7 @@ const Auth = () => {
                 <p className={styles.legal}>
                     Создавая аккаунт, вы соглашаетесь с<br/>
                     <button className={styles.legalLink} onClick={() => navigate('/user-agreement')}>Пользовательским соглашением</button> и
-                    <button className={styles.legalLink} onClick={() => navigate('/privacy-policy')}> Политикой<br/>конфиденциальности</button>
+                    <button className={styles.legalLink} onClick={() => navigate('/privacy-policy')}> Политикой конфиденциальности</button>
                 </p>
             </div>
         </>
