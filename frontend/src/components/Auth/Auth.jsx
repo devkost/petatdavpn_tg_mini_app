@@ -2,6 +2,8 @@ import { useNavigate } from 'react-router-dom'
 import styles from './Auth.module.css';
 
 const Auth = () => {
+    const navigate = useNavigate()
+
     return (
         <>
             <div className={styles.info}>
@@ -58,8 +60,8 @@ const Auth = () => {
 
                 <p className={styles.legal}>
                     Создавая аккаунт, вы соглашаетесь с<br/>
-                    <a href="#">Условиями использования</a> и
-                    <a href="#"> Политикой<br/>конфиденциальности</a>
+                    <button className={styles.legalLink} onClick={() => navigate('/user-agreement')}>Пользовательским соглашением</button> и
+                    <button className={styles.legalLink} onClick={() => navigate('/privacy-policy')}> Политикой<br/>конфиденциальности</button>
                 </p>
             </div>
         </>

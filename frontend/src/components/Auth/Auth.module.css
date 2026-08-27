@@ -153,6 +153,17 @@
 }
 .legal a { color: #60A5FA; text-decoration: none; }
 .legal a:hover { text-decoration: underline; }
+.legalLink {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: inherit;
+    color: #60A5FA;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+.legalLink:hover { text-decoration: underline; }
 
 /* ═══════════════════════════════════════════════════════════════
    МОБИЛЬНЫЕ / TG MINI APP  (≤ 520px)
